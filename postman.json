@@ -1,0 +1,481 @@
+{
+  "info": {
+    "name": "Laravel DDD API - CRUD Completo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "laravel-ddd-api-full-crud"
+  },
+  "item": [
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "Crear Company",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Acme Corp\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8888/api/companies",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "companies"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Companies",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8888/api/companies",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "companies"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Company por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8888/api/companies/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "companies",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Company",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Acme Corp Modificado\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8888/api/companies/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "companies",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Company",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8888/api/companies/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "companies",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Plans",
+      "item": [
+        {
+          "name": "Crear Plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"B\\u00e1sico\",\n  \"price\": 100,\n  \"description\": \"Plan b\\u00e1sico para empresas peque\\u00f1as\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8888/api/plans",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "plans"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Plans",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8888/api/plans",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "plans"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Plan por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8888/api/plans/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "plans",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Plan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Premium\",\n  \"price\": 250,\n  \"description\": \"Plan premium para empresas grandes\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8888/api/plans/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "plans",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Plan",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8888/api/plans/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "plans",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Crear User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Juan P\\u00e9rez\",\n  \"email\": \"juan@example.com\",\n  \"password\": \"secret123\",\n  \"company_id\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8888/api/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8888/api/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver User por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8888/api/users/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Juan P. Modificado\",\n  \"email\": \"juan.modificado@example.com\",\n  \"password\": \"nuevo123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8888/api/users/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar User",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8888/api/users/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions",
+      "item": [
+        {
+          "name": "Crear Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_id\": 1,\n  \"plan_id\": 1,\n  \"start_date\": \"2025-07-10\",\n  \"end_date\": \"2025-12-31\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8888/api/subscriptions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "subscriptions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Subscriptions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8888/api/subscriptions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "subscriptions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ver Subscription por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8888/api/subscriptions/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "subscriptions",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Subscription",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_date\": \"2025-08-01\",\n  \"end_date\": \"2026-01-31\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8888/api/subscriptions/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "subscriptions",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Subscription",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8888/api/subscriptions/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8888",
+              "path": [
+                "api",
+                "subscriptions",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

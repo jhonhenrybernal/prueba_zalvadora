@@ -106,3 +106,18 @@ php artisan test
 Pull requests y sugerencias son bienvenidas.
 
 ---
+
+## 📬 Colección de Postman
+
+Puedes importar la colección de pruebas de la API en Postman para facilitar tus pruebas manuales.
+
+- [Descargar colección Postman (postman.json)](./postman.json)
+
+### Cómo usarlo
+
+1. Descarga el archivo anterior o cópialo a tu proyecto.
+2. Abre Postman.
+3. Haz clic en “Import” > “Archivo” y selecciona `postman_collection.json`.
+4. ¡Listo! Ahora puedes probar todos los endpoints de la API ya configurados.
+
+> **Tip:** Si usas tokens o autenticación, revisa el apartado de login primero y copia tu token para usarlo en las siguientes peticiones.
