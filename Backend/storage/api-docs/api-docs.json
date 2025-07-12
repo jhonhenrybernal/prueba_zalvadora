@@ -1,0 +1,616 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Documentación - Prueba Zalvadora",
+    "description": "Documentación de la API para el sistema SaaS usando Laravel + DDD",
+    "version": "1.0.0",
+    "contact": {
+      "email": "tu-correo@dominio.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost/api",
+      "description": "Servidor local"
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Registrar un nuevo usuario",
+        "description": "Permite registrar un nuevo usuario en el sistema.",
+        "operationId": "registerUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name",
+                  "email",
+                  "password",
+                  "company_id"
+                ],
+                "properties": {
+                  "name": { "type": "string", "example": "Jane Doe" },
+                  "email": { "type": "string", "example": "jane@example.com" },
+                  "password": { "type": "string", "example": "secret" },
+                  "company_id": { "type": "integer", "example": 1 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario registrado exitosamente",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" },
+                "example": {
+                  "id": 10,
+                  "name": "Jane Doe",
+                  "email": "jane@example.com",
+                  "company_id": 1,
+                  "created_at": "2024-07-10T19:40:23.000000Z",
+                  "updated_at": "2024-07-10T19:40:23.000000Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "El email es obligatorio" }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "El usuario ya existe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Ya existe un usuario con ese email" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login y obtención de token",
+        "operationId": "loginUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string", "example": "jane@example.com" },
+                  "password": { "type": "string", "example": "secret" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token generado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": { "type": "string", "example": "1|Xyz..." }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciales inválidas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Unauthorized" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Listar todos los usuarios",
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/User" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Crear un nuevo usuario",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/User" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario creado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Obtener un usuario por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario encontrado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          },
+          "404": { "description": "No encontrado" }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Actualizar un usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/User" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Usuario actualizado" }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Eliminar un usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Usuario eliminado" }
+        }
+      }
+    },
+    "/companies": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Listar todas las compañías",
+        "responses": {
+          "200": {
+            "description": "Lista de compañías",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Company" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Crear una nueva compañía",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Company" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Compañía creada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Company" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/{id}": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Obtener una compañía por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Compañía encontrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Company" }
+              }
+            }
+          },
+          "404": { "description": "No encontrado" }
+        }
+      },
+      "put": {
+        "tags": ["Companies"],
+        "summary": "Actualizar una compañía",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Company" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Compañía actualizada" }
+        }
+      },
+      "delete": {
+        "tags": ["Companies"],
+        "summary": "Eliminar una compañía",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Compañía eliminada" }
+        }
+      }
+    },
+    "/plans": {
+      "get": {
+        "tags": ["Plans"],
+        "summary": "Listar todos los planes",
+        "responses": {
+          "200": {
+            "description": "Lista de planes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Plan" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Plans"],
+        "summary": "Crear un nuevo plan",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Plan" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Plan creado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Plan" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plans/{id}": {
+      "get": {
+        "tags": ["Plans"],
+        "summary": "Obtener un plan por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Plan encontrado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Plan" }
+              }
+            }
+          },
+          "404": { "description": "No encontrado" }
+        }
+      },
+      "put": {
+        "tags": ["Plans"],
+        "summary": "Actualizar un plan",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Plan" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Plan actualizado" }
+        }
+      },
+      "delete": {
+        "tags": ["Plans"],
+        "summary": "Eliminar un plan",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Plan eliminado" }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "tags": ["Subscriptions"],
+        "summary": "Listar todas las suscripciones",
+        "responses": {
+          "200": {
+            "description": "Lista de suscripciones",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Subscription" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Subscriptions"],
+        "summary": "Crear una nueva suscripción",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Subscription" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Suscripción creada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Subscription" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{id}": {
+      "get": {
+        "tags": ["Subscriptions"],
+        "summary": "Obtener una suscripción por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Suscripción encontrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Subscription" }
+              }
+            }
+          },
+          "404": { "description": "No encontrado" }
+        }
+      },
+      "put": {
+        "tags": ["Subscriptions"],
+        "summary": "Actualizar una suscripción",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Subscription" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Suscripción actualizada" }
+        }
+      },
+      "delete": {
+        "tags": ["Subscriptions"],
+        "summary": "Eliminar una suscripción",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Suscripción eliminada" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": ["name", "email", "company_id"],
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "name": { "type": "string", "example": "Jane Doe" },
+          "email": { "type": "string", "example": "jane@example.com" },
+          "company_id": { "type": "integer", "example": 1 },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Company": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "name": { "type": "string", "example": "Acme Corp" }
+        }
+      },
+      "Plan": {
+        "type": "object",
+        "required": ["name", "monthly_price", "user_limit", "features"],
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "name": { "type": "string", "example": "Pro" },
+          "monthly_price": { "type": "number", "format": "float", "example": 19.99 },
+          "user_limit": { "type": "integer", "example": 1 },
+          "features": {
+            "type": "array",
+            "items": { "type": "string" },
+            "example": ["Support", "Unlimited Projects"]
+          },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "required": ["company_id", "plan_id", "starts_at"],
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "company_id": { "type": "integer", "example": 1 },
+          "plan_id": { "type": "integer", "example": 1 },
+          "starts_at": { "type": "string", "format": "date-time", "example": "2024-01-01T00:00:00Z" },
+          "ends_at": { "type": "string", "format": "date-time", "example": "2024-12-31T00:00:00Z" }
+        }
+      }
+    }
+  },
+  "tags": [
+    { "name": "Auth", "description": "Endpoints de autenticación y registro" },
+    { "name": "Users", "description": "Gestión de usuarios" },
+    { "name": "Companies", "description": "Gestión de compañías" },
+    { "name": "Plans", "description": "Gestión de planes" },
+    { "name": "Subscriptions", "description": "Gestión de suscripciones" }
+  ]
+}
